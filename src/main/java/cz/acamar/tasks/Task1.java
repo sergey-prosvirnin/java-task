@@ -1,6 +1,9 @@
 package cz.acamar.tasks;
 
+import cz.acamar.tasks.exception.NotValidStringException;
+
 public class Task1 {
+    private String sentence;
 
     /**
      * Task 1. Length of the last word.
@@ -17,6 +20,23 @@ public class Task1 {
      * @return - the length of the last word in the string.
      */
     public int lengthOfLastWord(String str) {
-        return 0;
+        sentence = str;
+
+        if (isNullPointerOrBlankString()) {
+            throw new NotValidStringException("Getting null pointer or empty string!");
+        }
+
+        final String[] arrayOfWords = getArrayOfWords();
+        final String lastElementOfArray = arrayOfWords[arrayOfWords.length - 1];
+
+        return lastElementOfArray.length();
+    }
+
+    private boolean isNullPointerOrBlankString() {
+        return sentence == null || sentence.isBlank();
+    }
+
+    private String[] getArrayOfWords() {
+        return sentence.split("\\s");
     }
 }
